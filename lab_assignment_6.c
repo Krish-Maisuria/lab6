@@ -1,10 +1,23 @@
+#define _CRT_SECURE_NO_WARNINGS 
 #include <stdio.h>
+#include <stdlib.h>
+
 
 int search(int numbers[], int low, int high, int value) 
 {
-	return -1;
-}
+	if (low > high) // Base case: value not found
+        return -1;
 
+    int mid = low + (high - low) / 2;
+
+    if (numbers[mid] == value) // Found the value
+        return mid;
+    else if (numbers[mid] < value) // Value may be in the right half
+        return search(numbers, mid + 1, high, value);
+    else // Value may be in the left half
+        return search(numbers, low, mid - 1, value);
+}
+	
 void printArray(int numbers[], int sz)
 {
 	int i;
